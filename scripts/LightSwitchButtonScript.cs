@@ -32,7 +32,7 @@ public class LightSwitchButtonScript : MonoBehaviour
         {
             if (_backgroundColour.color.g > 1- LightColourOnG)
             {
-                _backgroundColour.color -= new Color(0.00392156862f * 2, 0.00392156862f * 2, 0.00392156862f * 2, 0);
+                _backgroundColour.color -= new Color(0.00392156862f * 3, 0.00392156862f * 3, 0.00392156862f * 3, 0);
                 _darkIcon.color += new Color(0.0049999999905f, 0.0049999999905f, 0.0049999999905f, 0);
             }
             else
@@ -45,7 +45,7 @@ public class LightSwitchButtonScript : MonoBehaviour
         {
             if (_backgroundColour.color.g < LightColourOnG)
             {
-                _backgroundColour.color += new Color(0.00392156862f *2, 0.00392156862f * 2, 0.00392156862f * 2, 0);
+                _backgroundColour.color += new Color(0.00392156862f *3, 0.00392156862f * 3, 0.00392156862f * 3, 0);
                 
                 _darkIcon.color -= new Color(0.0049999999905f, 0.0049999999905f, 0.0049999999905f, 0);
             }

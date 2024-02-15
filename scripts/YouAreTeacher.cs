@@ -10,6 +10,5 @@ public class YouAreTeacher : MonoBehaviour,ISwap
     {
         ISwap.Swap(_slidesToGet);
         ISwap.SwapDown(_slidesToDown);
-        YouAreStudent.IsTeacher = true;
     }
 }
