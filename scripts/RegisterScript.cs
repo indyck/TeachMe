@@ -36,25 +36,29 @@ public class RegisterScript : MonoBehaviour, ISwap
     [SerializeField]private InputField[] _textInputs;
     [SerializeField] private Transform[] _slides;
     [SerializeField] private Transform[] _slidesToDown;
-    public string Name = "Negr";
-    public string Surname = "Negrovich";
-    public string Password = "0090";
+    public static string Name;
+    public static string Surname;
+    public static string Password;
     private void Start()
     {
-        foreach(InputField i in _textInputs)
-        {
-            i.GetComponent<InputField>();
-        }
-        Name = _textInputs[0].text;
-        Surname = _textInputs[1].text;
-        Password = _textInputs[2].text;
+        
+        Name = "Negr";
+        Surname = "Negrovich";
+        Password = "0090";
     }
     public void OnEndOfEnter()
     {
-        foreach(InputField i in _textInputs)
+        foreach (InputField i in _textInputs)
         {
-            //проверка полей
+            i.GetComponent<InputField>();
         }
+        try
+        {
+            Name = _textInputs[0].text;
+            Surname = _textInputs[1].text;
+            Password = _textInputs[2].text;
+        }
+        catch { }
         if (OnClickEnterText.InEnter)
         {
             //if аккаунт есть:
@@ -64,6 +68,7 @@ public class RegisterScript : MonoBehaviour, ISwap
         }
         else
         {
+            
             //if аккаунта нет:
             ISwap.Swap(_slides);
             ISwap.SwapDown(_slidesToDown);
