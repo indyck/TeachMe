@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 namespace OpenAI
 {
@@ -17,7 +18,8 @@ namespace OpenAI
         private OpenAIApi openai = new OpenAIApi();
 
         private List<ChatMessage> messages = new List<ChatMessage>();
-        private string prompt = "Act as a random stranger in a chat room and reply to the questions. Don't break character. Don't ever mention that you are an AI model.";
+        private string prompt = "Твоя роль - помощник-ассистент в нашем приложении. Оно создано для прохождения курсов.Кнопки \"Админ панель, профиль, чатов и кнопка для диалога с тобой находятся в нижней панели. У пользователей есть 2 роли, перподаватель и ученик. Ученик может проходить курсы и задавать вопросы преподавателю. Преподаватель может редактировать курсы и отвечать ученикам в линчных сообщениях.\". Не выходи из роли. Не давай длинные ответы!!!!! Твое ограничение - 20 слов. Не упоминай, что ты AI модель";
+
 
         private void Start()
         {
@@ -32,9 +34,11 @@ namespace OpenAI
             item.GetChild(0).GetChild(0).GetComponent<Text>().text = message.Content;
             item.anchoredPosition = new Vector2(0, -height);
             LayoutRebuilder.ForceRebuildLayoutImmediate(item);
-            height += item.sizeDelta.y;
+            height += item.sizeDelta.x;
+            
             scroll.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
             scroll.verticalNormalizedPosition = 0;
+            
         }
 
         private async void SendReply()
@@ -50,9 +54,9 @@ namespace OpenAI
             if (messages.Count == 0) newMessage.Content = prompt + "\n" + inputField.text; 
             
             messages.Add(newMessage);
-            
             button.enabled = false;
             inputField.text = "";
+            
             inputField.enabled = false;
             
             // Complete the instruction
@@ -66,13 +70,12 @@ namespace OpenAI
             {
                 var message = completionResponse.Choices[0].Message;
                 message.Content = message.Content.Trim();
-                
                 messages.Add(message);
                 AppendMessage(message);
             }
             else
             {
-                Debug.LogWarning("No text was generated from this prompt.");
+                Debug.LogWarning("Для вашего промта текст не был сгенерирован.");
             }
 
             button.enabled = true;
